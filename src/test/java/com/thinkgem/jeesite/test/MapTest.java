@@ -8,4 +8,5 @@ import java.util.Map;
  */
 public class MapTest {
     Map map = new HashMap();
+
 }
