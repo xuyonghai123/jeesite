@@ -9,6 +9,7 @@ public class List {
     ArrayList list = new ArrayList();
     int a=0;
     int b=1;
+    int c=2;
     void asd(){
 
     }
