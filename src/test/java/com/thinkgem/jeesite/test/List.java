@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class List {
     ArrayList list = new ArrayList();
     int a=0;
+    int b=1;
     void asd(){
 
     }
