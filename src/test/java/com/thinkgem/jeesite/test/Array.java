@@ -28,9 +28,8 @@ public class Array {
         map[0] =new HashMap();
         map[0].put("a","123");
 
-        String  ars=  "[[/dev/vda1, 15G, 3.4G, 11G, 24%, /], [devtmpfs, 361M, 0, 361M, 0%, /dev], [tmpfs, 371M, 0, 371M, 0%, /dev/shm], [tmpfs, 371M, 47M, 324M, 13%, /run], [tmpfs, 371M, 0, 371M, 0%, /sys/fs/cgroup], [tmpfs, 75M, 0, 75M, 0%, /run/user/0]] ";
-        List list = Arrays.asList(ars);
-        System.out.println(list.size());
+//        List list = Arrays.asList(ars);
+//        System.out.println(list.size());
         System.out.println("map:"+Arrays.toString(map));
     }
 }
