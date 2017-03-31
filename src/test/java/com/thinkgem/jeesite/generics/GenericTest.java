@@ -1,12 +1,14 @@
 package com.thinkgem.jeesite.generics;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Thinkpad on 17/03/23.
  **/
-public class GenericTest {
+public class GenericTest implements Serializable  {
     public static void main(String[] args) {
         List<String> name = new ArrayList<String>();
         List<Integer> age = new ArrayList<Integer>();
@@ -17,11 +19,18 @@ public class GenericTest {
         number.add(314);
 
 //        getData(name);
-        getData(age);
-        getData(number);
+        try {
+            getData(age);
+            getData(number);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            System.out.println("finally:always performed");
+        }
+
     }
 
-    public static void getData(List<? extends Number> data) {
+    public static void getData(List<? extends Number> data) throws Exception {
         System.out.println("data :" + data.get(0));
     }
 }

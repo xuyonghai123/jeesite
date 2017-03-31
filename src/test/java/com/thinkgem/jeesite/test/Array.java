@@ -1,7 +1,9 @@
 package com.thinkgem.jeesite.test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Thinkpad on 17/03/14.
@@ -20,10 +22,15 @@ public class Array {
         num [2][0] = 7;
         num [2][1] = 8;
         num [2][2] = 9;
+        int[] arr1= new int [] {1,2,3,4,5};
+
+        Map[] map = new Map[5];
+        map[0] =new HashMap();
+        map[0].put("a","123");
 
         String  ars=  "[[/dev/vda1, 15G, 3.4G, 11G, 24%, /], [devtmpfs, 361M, 0, 361M, 0%, /dev], [tmpfs, 371M, 0, 371M, 0%, /dev/shm], [tmpfs, 371M, 47M, 324M, 13%, /run], [tmpfs, 371M, 0, 371M, 0%, /sys/fs/cgroup], [tmpfs, 75M, 0, 75M, 0%, /run/user/0]] ";
         List list = Arrays.asList(ars);
         System.out.println(list.size());
-        System.out.println("num:"+num);
+        System.out.println("map:"+Arrays.toString(map));
     }
 }
