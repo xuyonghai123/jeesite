@@ -1,9 +1,11 @@
 package com.thinkgem.jeesite.generics;
 
+
 /**
  * Created by Thinkpad on 17/03/23.
  **/
 public class Box<T> {
+//    Array array = new Array();
     private T t;
 
     private void add(T t) {
