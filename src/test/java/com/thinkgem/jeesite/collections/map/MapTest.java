@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.test;
+package com.thinkgem.jeesite.collections.map;
 
 import java.util.*;
 
@@ -10,14 +10,13 @@ public class MapTest {
 
     public static void main(String[] args) {
 //        Map hashMap = new HashMap();
-//        Map linkedHashMap = new LinkedHashMap();
-//        Map hashtable = new Hashtable();
-//        Map  treeMap = new TreeMap();
-//        Map weakHashMap = new WeakHashMap();
-//
+        Map linkedHashMap = new LinkedHashMap();
+        Map hashtable = new Hashtable();
+        Map  treeMap = new TreeMap();
+        Map weakHashMap = new WeakHashMap();
+
 //        hashMap.put("111","123");
 //        hashMap.put("222","234");
-//
 //        System.out.println(hashMap);
 
 

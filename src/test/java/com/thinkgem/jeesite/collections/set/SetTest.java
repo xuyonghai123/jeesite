@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.test;
+package com.thinkgem.jeesite.collections.set;
 
 import java.util.*;
 
