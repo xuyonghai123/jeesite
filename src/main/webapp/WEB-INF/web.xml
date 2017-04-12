@@ -15,7 +15,7 @@
 		<listener-class>com.thinkgem.jeesite.modules.sys.listener.WebContextListener</listener-class>
 	</listener>
 	<listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>  
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -79,7 +79,21 @@
 		<filter-name>sitemeshFilter</filter-name>
 		<url-pattern>/f/*</url-pattern>
 	</filter-mapping>
-	
+
+	<!--测试Servlet -->
+	<servlet>
+		<servlet-name>AServlet</servlet-name>
+		<servlet-class>servlet.Aservlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AServlet</servlet-name>
+		<url-pattern>/AServlet</url-pattern>
+	</servlet-mapping>
+
+
 	<!-- MVC Servlet -->
 	<servlet>
 		<servlet-name>springServlet</servlet-name>
