@@ -598,6 +598,11 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/UserAgentUtils-1.13.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.10-FINAL</version>
+		</dependency>
 
 		<!-- 自定义jar依赖包
 		<dependency>
@@ -854,6 +859,8 @@
 							<value>${project.build.sourceEncoding}</value>
 						</systemProperty>
 					</systemProperties>
+					<stopKey/>
+					<stopPort/>
 				</configuration>
 			</plugin>
 
