@@ -7,18 +7,20 @@ import java.util.*;
  */
 public class MapTest {
 
-
+    /**
+    *Map实现类总结：
+    * 一、
+     * HashMap 使用哈希表（hash table）实现，在keys和/或values之中都是无序的
+     * TreeMap 基于红黑树（red-black tree）数据结构实现，按key排序
+     * LinkHashMap保持插入排序
+     * Hashtable与HashMap实现方式一样，但Hashtable是线程安全的，HashMap是线程不安全的
+    * */
     public static void main(String[] args) {
 //        Map hashMap = new HashMap();
         Map linkedHashMap = new LinkedHashMap();
         Map hashtable = new Hashtable();
         Map  treeMap = new TreeMap();
         Map weakHashMap = new WeakHashMap();
-
-//        hashMap.put("111","123");
-//        hashMap.put("222","234");
-//        System.out.println(hashMap);
-
 
         ArrayList<Integer> list = new ArrayList<Integer>();
         for(int i=0;i<20;i++){

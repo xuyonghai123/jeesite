@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class ListTest {
     /**
-    * List实现类总结
+     * List实现类总结
      * 一、线程安全性：
      *    线程安全：Vector 、 Stack
      *    线程不安全： ArrayList 、 LinkedList
@@ -31,6 +31,7 @@ public class ListTest {
         linkedList.add("LinkedList Test4");
         linkedList.add("LinkedList Test5");
         System.out.println(linkedList.get(0));
+        System.out.println(linkedList);
 
         System.out.println("分割-------------------------------------LinkedList-------------------------------------");
         /*线程不安全*/
