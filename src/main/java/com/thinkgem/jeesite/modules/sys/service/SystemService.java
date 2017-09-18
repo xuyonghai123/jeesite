@@ -112,7 +112,7 @@ public class SystemService extends BaseService implements InitializingBean {
 
 	/**
 	 * 通过部门ID获取用户列表，仅返回用户id和name（树查询用户时用）
-	 * @param user
+	 * @param
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -400,11 +400,11 @@ public class SystemService extends BaseService implements InitializingBean {
 	 * 获取Key加载信息
 	 */
 	public static boolean printKeyLoadMessage(){
-		StringBuilder sb = new StringBuilder();
-		sb.append("\r\n======================================================================\r\n");
-		sb.append("\r\n    欢迎使用 "+Global.getConfig("productName")+"  - Powered By http://jeesite.com\r\n");
-		sb.append("\r\n======================================================================\r\n");
-		System.out.println(sb.toString());
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("\r\n======================================================================\r\n");
+//		sb.append("\r\n    欢迎使用 "+Global.getConfig("productName")+"  - Powered By http://jeesite.com\r\n");
+//		sb.append("\r\n======================================================================\r\n");
+//		System.out.println(sb.toString());
 		return true;
 	}
 	

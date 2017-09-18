@@ -593,7 +593,7 @@ public class JedisUtils {
 	/**
 	 * 移除Map缓存中的值
 	 * @param key 键
-	 * @param value 值
+	 * @param mapKey 值
 	 * @return
 	 */
 	public static long mapRemove(String key, String mapKey) {
@@ -614,7 +614,7 @@ public class JedisUtils {
 	/**
 	 * 移除Map缓存中的值
 	 * @param key 键
-	 * @param value 值
+	 * @param mapKey 值
 	 * @return
 	 */
 	public static long mapObjectRemove(String key, String mapKey) {
@@ -635,7 +635,7 @@ public class JedisUtils {
 	/**
 	 * 判断Map缓存中的Key是否存在
 	 * @param key 键
-	 * @param value 值
+	 * @param mapKey 值
 	 * @return
 	 */
 	public static boolean mapExists(String key, String mapKey) {
@@ -656,7 +656,7 @@ public class JedisUtils {
 	/**
 	 * 判断Map缓存中的Key是否存在
 	 * @param key 键
-	 * @param value 值
+	 * @param mapKey 值
 	 * @return
 	 */
 	public static boolean mapObjectExists(String key, String mapKey) {
@@ -783,7 +783,7 @@ public class JedisUtils {
 	/**
 	 * 归还资源
 	 * @param jedis
-	 * @param isBroken
+	 * @param jedis
 	 */
 	public static void returnBrokenResource(Jedis jedis) {
 		if (jedis != null) {
@@ -794,7 +794,7 @@ public class JedisUtils {
 	/**
 	 * 释放资源
 	 * @param jedis
-	 * @param isBroken
+	 * @param jedis
 	 */
 	public static void returnResource(Jedis jedis) {
 		if (jedis != null) {
@@ -804,7 +804,7 @@ public class JedisUtils {
 
 	/**
 	 * 获取byte[]类型Key
-	 * @param key
+	 * @param object
 	 * @return
 	 */
 	public static byte[] getBytesKey(Object object){
@@ -835,7 +835,7 @@ public class JedisUtils {
 	
 	/**
 	 * Object转换byte[]类型
-	 * @param key
+	 * @param object
 	 * @return
 	 */
 	public static byte[] toBytes(Object object){
@@ -844,7 +844,7 @@ public class JedisUtils {
 
 	/**
 	 * byte[]型转换Object
-	 * @param key
+	 * @param bytes
 	 * @return
 	 */
 	public static Object toObject(byte[] bytes){

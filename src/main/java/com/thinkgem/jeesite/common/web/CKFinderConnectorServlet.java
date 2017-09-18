@@ -66,10 +66,7 @@ public class CKFinderConnectorServlet extends ConnectorServlet {
 					+ principal + "/" + type + (currentFolder != null ? currentFolder : "");
 			FileUtils.createDirectory(FileUtils.path(realPath));
 		}
-//		System.out.println("------------------------");
-//		for (Object key : request.getParameterMap().keySet()){
-//			System.out.println(key + ": " + request.getParameter(key.toString()));
-//		}
+
 	}
 	
 }

@@ -255,7 +255,7 @@ public class GenUtils {
 	/**
 	 * 根据分类获取模板列表
 	 * @param config
-	 * @param genScheme
+	 * @param config,
 	 * @param isChildTable 是否是子表
 	 * @return
 	 */
@@ -292,7 +292,7 @@ public class GenUtils {
 	/**
 	 * 获取数据模型
 	 * @param genScheme
-	 * @param genTable
+	 * @param genScheme
 	 * @return
 	 */
 	public static Map<String, Object> getDataModel(GenScheme genScheme){
@@ -328,7 +328,7 @@ public class GenUtils {
 	 * 生成到文件
 	 * @param tpl
 	 * @param model
-	 * @param replaceFile
+	 * @param isReplaceFile
 	 * @return
 	 */
 	public static String generateToFile(GenTemplate tpl, Map<String, Object> model, boolean isReplaceFile){
@@ -358,7 +358,10 @@ public class GenUtils {
 			return "文件已存在："+fileName+"<br/>";
 		}
 	}
-	
+
+
+
+
 	public static void main(String[] args) {
 		try {
 			GenConfig config = getConfig();

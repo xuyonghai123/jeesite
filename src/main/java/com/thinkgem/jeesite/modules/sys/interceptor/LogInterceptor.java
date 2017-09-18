@@ -32,7 +32,6 @@ public class LogInterceptor extends BaseService implements HandlerInterceptor {
 		if (logger.isDebugEnabled()){
 			long beginTime = System.currentTimeMillis();//1、开始时间  
 	        startTimeThreadLocal.set(beginTime);		//线程绑定变量（该数据只有当前请求的线程可见）
-			logger.debug("---------------------------Start-------------------------------");
 	        logger.debug("开始计时: {}  URI: {}", new SimpleDateFormat("hh:mm:ss.SSS")
 	        	.format(beginTime), request.getRequestURI());
 		}
@@ -62,7 +61,6 @@ public class LogInterceptor extends BaseService implements HandlerInterceptor {
 	        		new SimpleDateFormat("hh:mm:ss.SSS").format(endTime), DateUtils.formatDateTime(endTime - beginTime),
 					request.getRequestURI(), Runtime.getRuntime().maxMemory()/1024/1024, Runtime.getRuntime().totalMemory()/1024/1024, Runtime.getRuntime().freeMemory()/1024/1024, 
 					(Runtime.getRuntime().maxMemory()-Runtime.getRuntime().totalMemory()+Runtime.getRuntime().freeMemory())/1024/1024);
-			logger.debug("---------------------------End-------------------------------");
 	        //删除线程变量中的数据，防止内存泄漏
 	        startTimeThreadLocal.remove();
 		}

@@ -1,6 +1,5 @@
 package com.thinkgem.jeesite.inheritance;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 
 /**
  * Created by Thinkpad on 17/04/11.

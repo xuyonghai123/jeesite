@@ -44,15 +44,9 @@ public class CKFinderConfig extends Configuration {
 		alc.setFileUpload(isUpload);
 		alc.setFileRename(isEdit);
 		alc.setFileDelete(isEdit);
-//		for (AccessControlLevel a : this.getAccessConrolLevels()){
-//			System.out.println(a.getRole()+", "+a.getResourceType()+", "+a.getFolder()
-//					+", "+a.isFolderView()+", "+a.isFolderCreate()+", "+a.isFolderRename()+", "+a.isFolderDelete()
-//					+", "+a.isFileView()+", "+a.isFileUpload()+", "+a.isFileRename()+", "+a.isFileDelete());
-//		}
+
 		AccessControlUtil.getInstance(this).loadACLConfig();
 		try {
-//			Principal principal = (Principal)SecurityUtils.getSubject().getPrincipal();
-//			this.baseURL = ServletContextFactory.getServletContext().getContextPath()+"/userfiles/"+principal+"/";
 			this.baseURL = FileUtils.path(Servlets.getRequest().getContextPath() + Global.USERFILES_BASE_URL + principal + "/");
 			this.baseDir = FileUtils.path(Global.getUserfilesBaseDir() + Global.USERFILES_BASE_URL + principal + "/");
 		} catch (Exception e) {

@@ -49,12 +49,6 @@ public class LoginController extends BaseController{
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Principal principal = UserUtils.getPrincipal();
 
-//		// 默认页签模式
-//		String tabmode = CookieUtils.getCookie(request, "tabmode");
-//		if (tabmode == null){
-//			CookieUtils.setCookie(response, "tabmode", "1");
-//		}
-		
 		if (logger.isDebugEnabled()){
 			logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
 		}
@@ -68,13 +62,6 @@ public class LoginController extends BaseController{
 		if(principal != null && !principal.isMobileLogin()){
 			return "redirect:" + adminPath;
 		}
-//		String view;
-//		view = "/WEB-INF/views/modules/sys/sysLogin.jsp";
-//		view = "classpath:";
-//		view += "jar:file:/D:/GitHub/jeesite/src/main/webapp/WEB-INF/lib/jeesite.jar!";
-//		view += "/"+getClass().getName().replaceAll("\\.", "/").replace(getClass().getSimpleName(), "")+"view/sysLogin";
-//		view += ".jsp";
-//		System.out.println("------------------------------------------------------------");
 		return "modules/sys/sysLogin";
 	}
 
@@ -84,7 +71,7 @@ public class LoginController extends BaseController{
 	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.POST)
 	public String loginFail(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Principal principal = UserUtils.getPrincipal();
-		
+
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null){
 			return "redirect:" + adminPath;
@@ -140,7 +127,7 @@ public class LoginController extends BaseController{
 			logger.debug("show index, active session size: {}", sessionDAO.getActiveSessions(false).size());
 		}
 		
-		// 如果已登录，再次访问主页，则退出原账号。
+		// 如果已登录，再次访问主页，否则退出原账号。
 		if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
 			String logined = CookieUtils.getCookie(request, "LOGINED");
 			if (StringUtils.isBlank(logined) || "false".equals(logined)){
@@ -161,23 +148,7 @@ public class LoginController extends BaseController{
 			}
 			return "redirect:" + adminPath + "/login";
 		}
-		
-//		// 登录成功后，获取上次登录的当前站点ID
-//		UserUtils.putCache("siteId", StringUtils.toLong(CookieUtils.getCookie(request, "siteId")));
 
-//		System.out.println("==========================a");
-//		try {
-//			byte[] bytes = com.thinkgem.jeesite.common.utils.FileUtils.readFileToByteArray(
-//					com.thinkgem.jeesite.common.utils.FileUtils.getFile("c:\\sxt.dmp"));
-//			UserUtils.getSession().setAttribute("kkk", bytes);
-//			UserUtils.getSession().setAttribute("kkk2", bytes);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-////		for (int i=0; i<1000000; i++){
-////			//UserUtils.getSession().setAttribute("a", "a");
-////			request.getSession().setAttribute("aaa", "aa");
-////		}
 		return "modules/sys/sysIndex";
 	}
 	

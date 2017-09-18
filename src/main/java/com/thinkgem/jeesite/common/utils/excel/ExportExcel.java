@@ -1,10 +1,10 @@
-/**
+/*
  * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
 package com.thinkgem.jeesite.common.utils.excel;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
@@ -72,7 +72,7 @@ public class ExportExcel {
 	/**
 	 * 注解列表（Object[]{ ExcelField, Field/Method }）
 	 */
-	List<Object[]> annotationList = Lists.newArrayList();
+	private List<Object[]> annotationList = Lists.newArrayList();
 	
 	/**
 	 * 构造函数
@@ -143,8 +143,8 @@ public class ExportExcel {
 		Collections.sort(annotationList, new Comparator<Object[]>() {
 			public int compare(Object[] o1, Object[] o2) {
 				return new Integer(((ExcelField)o1[0]).sort()).compareTo(
-						new Integer(((ExcelField)o2[0]).sort()));
-			};
+						((ExcelField) o2[0]).sort());
+			}
 		});
 		// Initialize
 		List<String> headerList = Lists.newArrayList();
@@ -300,18 +300,18 @@ public class ExportExcel {
 	public Row addRow(){
 		return sheet.createRow(rownum++);
 	}
-	
 
-	/**
-	 * 添加一个单元格
-	 * @param row 添加的行
-	 * @param column 添加列号
-	 * @param val 添加值
-	 * @return 单元格对象
-	 */
-	public Cell addCell(Row row, int column, Object val){
-		return this.addCell(row, column, val, 0, Class.class);
-	}
+
+//	/**
+//	 * 添加一个单元格
+//	 * @param row 添加的行
+//	 * @param column 添加列号
+//	 * @param val 添加值
+//	 * @return 单元格对象
+//	 */
+//	public Cell addCell(Row row, int column, Object val){
+//		return this.addCell(row, column, val, 0, Class.class);
+//	}
 	
 	/**
 	 * 添加一个单元格
@@ -321,7 +321,7 @@ public class ExportExcel {
 	 * @param align 对齐方式（1：靠左；2：居中；3：靠右）
 	 * @return 单元格对象
 	 */
-	public Cell addCell(Row row, int column, Object val, int align, Class<?> fieldType){
+	private Cell addCell(Row row, int column, Object val, int align, Class<?> fieldType){
 		Cell cell = row.createCell(column);
 		String cellFormatString = "@";
 		try {
@@ -364,7 +364,7 @@ public class ExportExcel {
 			}
 		} catch (Exception ex) {
 			log.info("Set cell value ["+row.getRowNum()+","+column+"] error: " + ex.toString());
-			cell.setCellValue(val.toString());
+			cell.setCellValue(val != null ? val.toString() : null);
 		}
 		return cell;
 	}
@@ -402,7 +402,7 @@ public class ExportExcel {
 					val = "";
 				}
 				this.addCell(row, colunm++, val, ef.align(), ef.fieldType());
-				sb.append(val + ", ");
+				sb.append(val).append(", ");
 			}
 			log.debug("Write success: ["+row.getRowNum()+"] "+sb.toString());
 		}
@@ -430,15 +430,15 @@ public class ExportExcel {
 		return this;
 	}
 	
-	/**
-	 * 输出到文件
-	 * @param fileName 输出文件名
-	 */
-	public ExportExcel writeFile(String name) throws FileNotFoundException, IOException{
-		FileOutputStream os = new FileOutputStream(name);
-		this.write(os);
-		return this;
-	}
+//	/**
+//	 * 输出到文件
+//	 * @param name 输出文件名
+//	 */
+//	public ExportExcel writeFile(String name) throws FileNotFoundException, IOException{
+//		FileOutputStream os = new FileOutputStream(name);
+//		this.write(os);
+//		return this;
+//	}
 	
 	/**
 	 * 清理临时文件

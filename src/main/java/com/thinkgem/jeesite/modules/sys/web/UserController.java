@@ -347,26 +347,5 @@ public class UserController extends BaseController {
 		}
 		return mapList;
 	}
-    
-//	@InitBinder
-//	public void initBinder(WebDataBinder b) {
-//		b.registerCustomEditor(List.class, "roleList", new PropertyEditorSupport(){
-//			@Autowired
-//			private SystemService systemService;
-//			@Override
-//			public void setAsText(String text) throws IllegalArgumentException {
-//				String[] ids = StringUtils.split(text, ",");
-//				List<Role> roles = new ArrayList<Role>();
-//				for (String id : ids) {
-//					Role role = systemService.getRole(Long.valueOf(id));
-//					roles.add(role);
-//				}
-//				setValue(roles);
-//			}
-//			@Override
-//			public String getAsText() {
-//				return Collections3.extractToString((List) getValue(), "id", ",");
-//			}
-//		});
-//	}
+
 }

@@ -148,7 +148,7 @@ public class MenuController extends BaseController {
 	/**
 	 * isShowHide是否显示隐藏菜单
 	 * @param extId
-	 * @param isShowHidden
+	 * @param isShowHide
 	 * @param response
 	 * @return
 	 */

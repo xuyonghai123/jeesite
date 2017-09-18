@@ -1,5 +1,7 @@
 package com.thinkgem.jeesite.test;
 
+import com.thinkgem.jeesite.common.utils.MacUtils;
+
 /**
  * Created by Thinkpad on 17/03/09.
  */
@@ -17,5 +19,4 @@ public class Animal {
     public void run(){
         System.out.println("动物在奔跑");
     }
-
 }

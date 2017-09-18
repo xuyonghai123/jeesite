@@ -76,15 +76,15 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 				throw new AuthenticationException("msg:验证码错误, 请重试.");
 			}
 		}
-		
 		// 校验用户名密码
 		User user = getSystemService().getUserByLoginName(token.getUsername());
+
 		if (user != null) {
 			if (Global.NO.equals(user.getLoginFlag())){
 				throw new AuthenticationException("msg:该已帐号禁止登录.");
 			}
 			byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
-			return new SimpleAuthenticationInfo(new Principal(user, token.isMobileLogin()), 
+			return new SimpleAuthenticationInfo(new Principal(user, token.isMobileLogin()),
 					user.getPassword().substring(16), ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;

@@ -114,7 +114,7 @@ public abstract class BaseController {
 	
 	/**
 	 * 添加Model消息
-	 * @param message
+	 * @param messages
 	 */
 	protected void addMessage(Model model, String... messages) {
 		StringBuilder sb = new StringBuilder();
@@ -126,7 +126,7 @@ public abstract class BaseController {
 	
 	/**
 	 * 添加Flash消息
-	 * @param message
+	 * @param messages
 	 */
 	protected void addMessage(RedirectAttributes redirectAttributes, String... messages) {
 		StringBuilder sb = new StringBuilder();
@@ -205,11 +205,6 @@ public abstract class BaseController {
 			public void setAsText(String text) {
 				setValue(DateUtils.parseDate(text));
 			}
-//			@Override
-//			public String getAsText() {
-//				Object value = getValue();
-//				return value != null ? DateUtils.formatDateTime((Date)value) : "";
-//			}
 		});
 	}
 	

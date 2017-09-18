@@ -3,16 +3,25 @@
 <html>
 <head>
 	<title>${fns:getConfig('productName')}</title>
-	<meta name="decorator" content="blank"/><c:set var="tabmode" value="${empty cookie.tabmode.value ? '0' : cookie.tabmode.value}"/>
-    <c:if test="${tabmode eq '1'}"><link rel="Stylesheet" href="${ctxStatic}/jerichotab/css/jquery.jerichotab.css" />
-    <script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script></c:if>
+	<link rel="shortcut icon" href="${ctxStatic}/images/favicon.ico">
+	<meta name="decorator" content="blank"/>
+	<c:set var="tabmode" value="${empty cookie.tabmode.value ? '0' : cookie.tabmode.value}"/>
+    <c:if test="${tabmode eq '1'}">
+		<link rel="Stylesheet" href="${ctxStatic}/jerichotab/css/jquery.jerichotab.css" />
+    	<script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script>
+	</c:if>
 	<style type="text/css">
-		#main {padding:0;margin:0;} #main .container-fluid{padding:0 4px 0 6px;}
-		#header {margin:0 0 8px;position:static;} #header li {font-size:14px;_font-size:12px;}
+		#main {padding:0;margin:0;}
+		#main .container-fluid{padding:0 4px 0 6px;}
+		#header {margin:0 0 8px;position:static;}
+		#header li {font-size:14px;_font-size:12px;}
 		#header .brand {font-family:Helvetica, Georgia, Arial, sans-serif, 黑体;font-size:26px;padding-left:33px;}
 		#footer {margin:8px 0 0 0;padding:3px 0 0 0;font-size:11px;text-align:center;border-top:2px solid #0663A2;}
-		#footer, #footer a {color:#999;} #left{overflow-x:hidden;overflow-y:auto;} #left .collapse{position:static;}
-		#userControl>li>a{/*color:#fff;*/text-shadow:none;} #userControl>li>a:hover, #user #userControl>li.open>a{background:transparent;}
+		#footer, #footer a {color:#999;}
+		#left{overflow-x:hidden;overflow-y:auto;}
+		#left .collapse{position:static;}
+		#userControl>li>a{/*color:#fff;*/text-shadow:none;}
+		#userControl>li>a:hover, #user #userControl>li.open>a{background:transparent;}
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -151,7 +160,37 @@
 			<div class="navbar-inner">
 				<%--Logo--%>
 				<div class="brand"><span id="productName">${fns:getConfig('productName')}</span></div>
-				<%--右侧菜单--%>
+				<%--导航栏左侧菜单--%>
+				<div class="nav-collapse">
+					<ul id="menu" class="nav" style="*white-space:nowrap;float:none;">
+						<c:set var="firstMenu" value="true"/>
+						<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
+							<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">
+								<li class="menu ${not empty firstMenu && firstMenu ? ' active' : ''}">
+									<c:if test="${empty menu.href}">
+										<a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}"><span>${menu.name}</span></a>
+									</c:if>
+									<c:if test="${not empty menu.href}">
+										<a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame"><span>${menu.name}</span></a>
+									</c:if>
+								</li>
+								<c:if test="${firstMenu}">
+									<c:set var="firstMenuId" value="${menu.id}"/>
+								</c:if>
+								<c:set var="firstMenu" value="false"/>
+							</c:if>
+						</c:forEach><%--
+					<shiro:hasPermission name="cms:site:select">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">${fnc:getSite(fnc:getCurrentSiteId()).name}<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<c:forEach items="${fnc:getSiteList()}" var="site"><li><a href="${ctx}/cms/site/select?id=${site.id}&flag=1">${site.name}</a></li></c:forEach>
+						</ul>
+					</li>
+					</shiro:hasPermission> --%>
+					</ul>
+				</div><!--/.nav-collapse -->
+				<%--导航栏菜单--%>
 				<ul id="userControl" class="nav pull-right">
 					<%--访问主页--%>
 					<li><a href="${pageContext.request.contextPath}${fns:getFrontPath()}/index-${fnc:getCurrentSiteId()}.html" target="_blank" title="访问网站主页"><i class="icon-home"></i></a></li>
@@ -186,36 +225,7 @@
 						$("#productName").hide();$("#user").html($("#userControl"));$("#header").prepend($("#user, #logo"));
 					</script>
 				</c:if> --%>
-				<%--左侧菜单--%>
-				<div class="nav-collapse">
-					<ul id="menu" class="nav" style="*white-space:nowrap;float:none;">
-						<c:set var="firstMenu" value="true"/>
-						<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
-							<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">
-								<li class="menu ${not empty firstMenu && firstMenu ? ' active' : ''}">
-									<c:if test="${empty menu.href}">
-										<a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}"><span>${menu.name}</span></a>
-									</c:if>
-									<c:if test="${not empty menu.href}">
-										<a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame"><span>${menu.name}</span></a>
-									</c:if>
-								</li>
-								<c:if test="${firstMenu}">
-									<c:set var="firstMenuId" value="${menu.id}"/>
-								</c:if>
-								<c:set var="firstMenu" value="false"/>
-							</c:if>
-						</c:forEach><%--
-						<shiro:hasPermission name="cms:site:select">
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#">${fnc:getSite(fnc:getCurrentSiteId()).name}<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<c:forEach items="${fnc:getSiteList()}" var="site"><li><a href="${ctx}/cms/site/select?id=${site.id}&flag=1">${site.name}</a></li></c:forEach>
-							</ul>
-						</li>
-						</shiro:hasPermission> --%>
-					</ul>
-				</div><!--/.nav-collapse -->
+
 			</div>
 	    </div>
 	    <div class="container-fluid">

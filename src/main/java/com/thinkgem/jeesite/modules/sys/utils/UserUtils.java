@@ -171,7 +171,6 @@ public class UserUtils {
 			}
 			putCache(CACHE_MENU_LIST, menuList);
 		}
-		System.out.println("menuList:"+menuList);
 		return menuList;
 	}
 	

@@ -136,6 +136,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 			message = "系统出现点问题，请稍后再试！";
 			e.printStackTrace(); // 输出到控制台
 		}
+		System.out.println("登录失败："+className);
         request.setAttribute(getFailureKeyAttribute(), className);
         request.setAttribute(getMessageParam(), message);
         return true;

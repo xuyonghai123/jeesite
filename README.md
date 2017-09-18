@@ -57,24 +57,21 @@ JeeSite 提供了常用工具进行封装，包括日志工具、缓存工具、
 9. 兼容目前最流行浏览器（IE7+、Chrome、Firefox）IE6也支持，但体验效果差。
 
 ## 技术选型
-
 1、后端
-
 * 核心框架：Spring Framework 4.1
-* 安全框架：Apache Shiro 1.2
 * 视图框架：Spring MVC 4.1
+* 任务调度：Spring Task 4.1
+* 缓存框架：Ehcache 2.6、Redis
+* 持久层框架：MyBatis 3.2
+* 数据库连接池：Alibaba Druid 1.0
+* 安全框架：Apache Shiro 1.2
 * 服务端验证：Hibernate Validator 5.2
 * 布局框架：SiteMesh 2.4
 * 工作流引擎：Activiti 5.21
-* 任务调度：Spring Task 4.1
-* 持久层框架：MyBatis 3.2
-* 数据库连接池：Alibaba Druid 1.0
-* 缓存框架：Ehcache 2.6、Redis
 * 日志管理：SLF4J 1.7、Log4j
 * 工具类：Apache Commons、Jackson 2.2、Xstream 1.4、Dozer 5.3、POI 3.9
 
 2、前端
-
 * JS框架：jQuery 1.9
 * CSS框架：Twitter Bootstrap 2.3.1（稳定是后台，UI方面根据需求自己升级改造吧）。
 * 客户端验证：JQuery Validation Plugin 1.11。
@@ -89,7 +86,6 @@ JeeSite 提供了常用工具进行封装，包括日志工具、缓存工具、
 * 日期控件： My97DatePicker
 
 4、平台
-
 * 服务器中间件：在Java EE 5规范（Servlet 2.5、JSP 2.1）下开发，支持应用服务器中间件
 有Tomcat 6+、Jboss 7+、WebLogic 10+、WebSphere 8+。
 * 数据库支持：目前仅提供MySql和Oracle数据库的支持，但不限于数据库，平台留有其它数据库支持接口，
@@ -97,7 +93,6 @@ JeeSite 提供了常用工具进行封装，包括日志工具、缓存工具、
 * 开发环境：Java、Eclipse Java EE 4.3、Maven 3.1、Git
 
 ## 安全考虑
-
 1. 开发语言：系统采用Java 语言开发，具有卓越的通用性、高效性、平台移植性和安全性。
 2. 分层设计：（数据库层，数据访问层，业务逻辑层，展示层）层次清楚，低耦合，各层必须通过接口才能接入并进行参数校验（如：在展示层不可直接操作数据库），保证数据操作的安全。
 3. 双重验证：用户表单提交双验证：包括服务器端验证及客户端验证，防止用户通过浏览器恶意修改（如不可写文本域、隐藏变量篡改、上传非法文件等），跳过客户端验证操作数据库。
@@ -106,11 +101,9 @@ JeeSite 提供了常用工具进行封装，包括日志工具、缓存工具、
 6. 强制访问：系统对所有管理端链接都进行用户身份权限验证，防止用户直接填写url进行访问。
 
 ## 演示地址
-
 * <http://demo.jeesite.com/jeesite>  &nbsp; 用户名：thinkgem &nbsp; 密码：admin
 
 ## 快速体验
-
 1. 具备运行环境：JDK1.6+、Maven3.0+、MySql5+或Oracle10g+。
 2. 修改src\main\resources\jeesite.properties文件中的数据库设置参数。
 3. 根据修改参数创建对应MySql或Oracle数据库用户和参数。
@@ -119,13 +112,11 @@ JeeSite 提供了常用工具进行封装，包括日志工具、缓存工具、
 6. 最高管理员账号，用户名：thinkgem 密码：admin
 
 ## 常见问题
-
 1. 用一段时间提示内存溢出，请修改JVM参数：-Xmx512m -XX:MaxPermSize=256m
 2. 有时出现文字乱码：修改Tomcat的server.xml文件的Connector项，增加URIEncoding="UTF-8"
 3. 为什么新建菜单后看不到新建的菜单？因为授权问题，菜单管理只允许最高管理员账号管理（最高管理员默认账号：thinkgem 密码：admin）。
 
 ## 更多文档
-
 * <https://github.com/thinkgem/jeesite/tree/master/doc>
 
 ## 如何交流、反馈、参与贡献？

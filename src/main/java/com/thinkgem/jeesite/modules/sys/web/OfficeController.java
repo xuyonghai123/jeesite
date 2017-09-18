@@ -3,12 +3,15 @@
  */
 package com.thinkgem.jeesite.modules.sys.web;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +43,10 @@ public class OfficeController extends BaseController {
 
 	@Autowired
 	private OfficeService officeService;
-	
+
+	@Autowired
+	private SessionDAO sessionDAO;
+
 	@ModelAttribute("office")
 	public Office get(@RequestParam(required=false) String id) {
 		if (StringUtils.isNotBlank(id)){
@@ -52,7 +58,7 @@ public class OfficeController extends BaseController {
 
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = {""})
-	public String index(Office office, Model model) {
+	public String index() {
 //        model.addAttribute("list", officeService.findAll());
 		return "modules/sys/officeIndex";
 	}
@@ -79,10 +85,9 @@ public class OfficeController extends BaseController {
 		if (StringUtils.isBlank(office.getId())&&office.getParent()!=null){
 			int size = 0;
 			List<Office> list = officeService.findAll();
-			for (int i=0; i<list.size(); i++){
-				Office e = list.get(i);
-				if (e.getParent()!=null && e.getParent().getId()!=null
-						&& e.getParent().getId().equals(office.getParent().getId())){
+			for (Office e : list) {
+				if (e.getParent() != null && e.getParent().getId() != null
+						&& e.getParent().getId().equals(office.getParent().getId())) {
 					size++;
 				}
 			}
@@ -105,9 +110,8 @@ public class OfficeController extends BaseController {
 		officeService.save(office);
 		
 		if(office.getChildDeptList()!=null){
-			Office childOffice = null;
 			for(String id : office.getChildDeptList()){
-				childOffice = new Office();
+				Office childOffice = new Office();
 				childOffice.setName(DictUtils.getDictLabel(id, "sys_office_common", "未知"));
 				childOffice.setParent(office);
 				childOffice.setArea(office.getArea());
@@ -144,33 +148,39 @@ public class OfficeController extends BaseController {
 	 * @param extId 排除的ID
 	 * @param type	类型（1：公司；2：部门/小组/其它：3：用户）
 	 * @param grade 显示级别
-	 * @param response
-	 * @return
+	 * @return mapList
 	 */
 	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "treeData")
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, @RequestParam(required=false) String type,
-			@RequestParam(required=false) Long grade, @RequestParam(required=false) Boolean isAll, HttpServletResponse response) {
+			@RequestParam(required=false) Long grade, @RequestParam(required=false) Boolean isAll) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		List<Office> list = officeService.findList(isAll);
-		for (int i=0; i<list.size(); i++){
-			Office e = list.get(i);
-			if ((StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) && e.getParentIds().indexOf(","+extId+",")==-1))
-					&& (type == null || (type != null && (type.equals("1") ? type.equals(e.getType()) : true)))
-					&& (grade == null || (grade != null && Integer.parseInt(e.getGrade()) <= grade.intValue()))
-					&& Global.YES.equals(e.getUseable())){
+		for (Office e : list) {
+			if ((StringUtils.isBlank(extId) || !extId.equals(e.getId()) && !e.getParentIds().contains("," + extId + ",")) && (type == null || !type.equals("1") || type.equals(e.getType())) && (grade == null || Integer.parseInt(e.getGrade()) <= grade.intValue()) && Global.YES.equals(e.getUseable())) {
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("id", e.getId());
 				map.put("pId", e.getParentId());
 				map.put("pIds", e.getParentIds());
 				map.put("name", e.getName());
-				if (type != null && "3".equals(type)){
+//				map.put("icon","http://wx2.sinaimg.cn/mw690/0068qo6Gly1fgv723a9d9j300g00g0ms.jpg");
+				if (type != null && "3".equals(type)) {
 					map.put("isParent", true);
 				}
 				mapList.add(map);
 			}
 		}
 		return mapList;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "test")
+	public List<Integer> test(){
+		Collection<Session> sessions =  sessionDAO.getActiveSessions();
+		List<Integer> list = Lists.newArrayList();
+//		list.add(sessions);
+		list.add(sessions.size());
+		return list;
 	}
 }

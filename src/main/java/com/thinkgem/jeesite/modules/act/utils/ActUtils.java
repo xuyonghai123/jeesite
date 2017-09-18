@@ -1,6 +1,3 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package com.thinkgem.jeesite.modules.act.utils;
 
 import java.lang.annotation.Annotation;
@@ -74,7 +71,7 @@ public class ActUtils {
 //	}
 	
 	@SuppressWarnings({ "unused" })
-	public static Map<String, Object> getMobileEntity(Object entity,String spiltType){
+	private static Map<String, Object> getMobileEntity(Object entity, String spiltType){
 		if(spiltType==null){
 			spiltType="@";
 		}
@@ -95,12 +92,12 @@ public class ActUtils {
 						chinesName.add("");
 					}
 					if (m.getName().equals("getAct")){
-						Object act = m.invoke(entity, new Object[]{});
+						Object act = m.invoke(entity);
 						Method actMet = act.getClass().getMethod("getTaskId");
-						map.put("taskId", ObjectUtils.toString(m.invoke(act, new Object[]{}), ""));
+						map.put("taskId", ObjectUtils.identityToString(m.invoke(act)));
 					}else{
 						field.add(StringUtils.uncapitalize(m.getName().substring(3)));
-						value.add(ObjectUtils.toString(m.invoke(entity, new Object[]{}), ""));
+						value.add(ObjectUtils.identityToString(m.invoke(entity)));
 					}
 				}
 			}
@@ -117,9 +114,9 @@ public class ActUtils {
 	
 	/**
 	 * 获取流程表单URL
-	 * @param formKey
+	 * @param formKey form
 	 * @param act 表单传递参数
-	 * @return
+	 * @return string
 	 */
 	public static String getFormUrl(String formKey, Act act){
 		

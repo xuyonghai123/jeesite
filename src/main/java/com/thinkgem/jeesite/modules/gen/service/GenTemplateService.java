@@ -49,7 +49,7 @@ public class GenTemplateService extends BaseService {
 			genTemplateDao.update(genTemplate);
 		}
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void delete(GenTemplate genTemplate) {
 		genTemplateDao.delete(genTemplate);
