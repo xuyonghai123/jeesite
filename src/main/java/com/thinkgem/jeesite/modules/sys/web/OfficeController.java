@@ -3,12 +3,16 @@
  */
 package com.thinkgem.jeesite.modules.sys.web;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.common.config.Global;
+import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
+import com.thinkgem.jeesite.modules.sys.entity.Office;
+import com.thinkgem.jeesite.modules.sys.entity.User;
+import com.thinkgem.jeesite.modules.sys.service.OfficeService;
+import com.thinkgem.jeesite.modules.sys.utils.DictUtils;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -21,16 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.thinkgem.jeesite.common.config.Global;
-import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.modules.sys.entity.Office;
-import com.thinkgem.jeesite.modules.sys.entity.User;
-import com.thinkgem.jeesite.modules.sys.service.OfficeService;
-import com.thinkgem.jeesite.modules.sys.utils.DictUtils;
-import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 机构Controller
@@ -164,7 +161,9 @@ public class OfficeController extends BaseController {
 				map.put("pId", e.getParentId());
 				map.put("pIds", e.getParentIds());
 				map.put("name", e.getName());
-//				map.put("icon","http://wx2.sinaimg.cn/mw690/0068qo6Gly1fgv723a9d9j300g00g0ms.jpg");
+				map.put("iconOpen","/jeesite/static/jquery-ztree/3.5.12/css/zTreeStyle/img/diy/1_open.png");
+				map.put("iconClose","/jeesite/static/jquery-ztree/3.5.12/css/zTreeStyle/img/diy/1_close.png");
+				map.put("icon","/jeesite/static/jquery-ztree/3.5.12/css/zTreeStyle/img/diy/6.png");
 				if (type != null && "3".equals(type)) {
 					map.put("isParent", true);
 				}
