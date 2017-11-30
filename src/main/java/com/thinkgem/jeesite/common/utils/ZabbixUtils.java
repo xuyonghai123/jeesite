@@ -27,8 +27,6 @@ public class ZabbixUtils {
         ItemGetRequest itemGetRequest = new ItemGetRequest();
         try {
             zabbixApi.login(USERNAME,PASSWORD);
-
-
             //获取Zabbix的item
             Item item = zabbixApi.item();
             ItemGetResponse itemGetResponse= item.get(itemGetRequest);
