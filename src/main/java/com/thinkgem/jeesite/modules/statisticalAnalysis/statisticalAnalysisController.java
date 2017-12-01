@@ -17,4 +17,9 @@ public class statisticalAnalysisController {
     public String index(User user, Model model) {
         return "modules/statisticalAnalysis/history/history";
     }
+
+    @RequestMapping(value = {"netdevice"})
+    public String netdevice(User user, Model model) {
+        return "modules/statisticalAnalysis/history/netdevice";
+    }
 }
