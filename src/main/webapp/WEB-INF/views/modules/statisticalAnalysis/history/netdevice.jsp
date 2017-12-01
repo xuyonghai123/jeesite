@@ -13,8 +13,8 @@
     <script type="text/javascript" src="${ctxStatic}/echarts-2.2.7/build/dist/echarts.js"></script>
 </head>
 <body>
-<div id="main" style="height:600px"></div>
-
+<div id="main3" style="height:600px"></div>
+<div id="main4" style="height:600px"></div>
 <script type="text/javascript">
     // 路径配置
     require.config({
@@ -26,119 +26,167 @@
     require(
             [
                 'echarts',
-                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/bar',
+                'echarts/chart/pie',
+                'echarts/chart/line',
+                'echarts/chart/k',
+                'echarts/chart/scatter',
+                'echarts/chart/radar',
+                'echarts/chart/chord',
+                'echarts/chart/force',
+                'echarts/chart/map',
+                'echarts/chart/gauge',
+                'echarts/chart/funnel'
             ],
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main'));
+                var myChart3 = ec.init(document.getElementById('main3'));
 
-                option = {
-                    tooltip : {
-                        trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
+                option3 = {
+                    color : [
+                        'rgba(255, 69, 0, 0.5)',
+                        'rgba(255, 150, 0, 0.5)',
+                        'rgba(255, 200, 0, 0.5)',
+                        'rgba(155, 200, 50, 0.5)',
+                        'rgba(55, 200, 100, 0.5)'
+                    ],
+                    title : {
+                        text: '商业BI类图表',
+                        subtext: '纯属虚构'
                     },
-                    legend: {
-                        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c}%"
                     },
                     toolbox: {
                         show : true,
-                        orient: 'vertical',
-                        x: 'right',
-                        y: 'center',
                         feature : {
                             mark : {show: true},
                             dataView : {show: true, readOnly: false},
-                            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
                             restore : {show: true},
                             saveAsImage : {show: true}
                         }
                     },
-                    calculable : true,
-                    xAxis : [
-                        {
-                            type : 'category',
-                            data : ['周一','周二','周三','周四','周五','周六','周日']
-                        }
-                    ],
-                    yAxis : [
-                        {
-                            type : 'value'
-                        }
-                    ],
+                    legend: {
+                        data : ['展现','点击','访问','咨询','订单']
+                    },
                     series : [
                         {
-                            name:'直接访问',
-                            type:'bar',
-                            data:[320, 332, 301, 334, 390, 330, 320]
+                            name:'业务指标',
+                            type:'gauge',
+                            center: ['25%','55%'],
+                            splitNumber: 10,       // 分割段数，默认为5
+                            axisLine: {            // 坐标轴线
+                                lineStyle: {       // 属性lineStyle控制线条样式
+                                    color: [[0.2, '#228b22'],[0.8, '#48b'],[1, '#ff4500']],
+                                    width: 8
+                                }
+                            },
+                            axisTick: {            // 坐标轴小标记
+                                splitNumber: 10,   // 每份split细分多少段
+                                length :12,        // 属性length控制线长
+                                lineStyle: {       // 属性lineStyle控制线条样式
+                                    color: 'auto'
+                                }
+                            },
+                            axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                    color: 'auto'
+                                }
+                            },
+                            splitLine: {           // 分隔线
+                                show: true,        // 默认显示，属性show控制显示与否
+                                length :30,         // 属性length控制线长
+                                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                    color: 'auto'
+                                }
+                            },
+                            pointer : {
+                                width : 5
+                            },
+                            title : {
+                                show : true,
+                                offsetCenter: [0, '-40%'],       // x, y，单位px
+                                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                    fontWeight: 'bolder'
+                                }
+                            },
+                            detail : {
+                                formatter:'{value}%',
+                                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                    color: 'auto',
+                                    fontWeight: 'bolder'
+                                }
+                            },
+                            data:[{value: 50, name: '完成率'}]
                         },
                         {
-                            name:'邮件营销',
-                            type:'bar',
-                            stack: '广告',
-                            data:[120, 132, 101, 134, 90, 230, 210]
+                            name:'预期',
+                            type:'funnel',
+                            x: '45%',
+                            width: '45%',
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        formatter: '{b}预期'
+                                    },
+                                    labelLine: {
+                                        show : false
+                                    }
+                                },
+                                emphasis: {
+                                    label: {
+                                        position:'inside',
+                                        formatter: '{b}预期 : {c}%'
+                                    }
+                                }
+                            },
+                            data:[
+                                {value:60, name:'访问'},
+                                {value:40, name:'咨询'},
+                                {value:20, name:'订单'},
+                                {value:80, name:'点击'},
+                                {value:100, name:'展现'}
+                            ]
                         },
                         {
-                            name:'联盟广告',
-                            type:'bar',
-                            stack: '广告',
-                            data:[220, 182, 191, 234, 290, 330, 310]
-                        },
-                        {
-                            name:'视频广告',
-                            type:'bar',
-                            stack: '广告',
-                            data:[150, 232, 201, 154, 190, 330, 410]
-                        },
-                        {
-                            name:'搜索引擎',
-                            type:'bar',
-                            data:[862, 1018, 964, 1026, 1679, 1600, 1570],
-                            markLine : {
-                                itemStyle:{
-                                    normal:{
-                                        lineStyle:{
-                                            type: 'dashed'
+                            name:'实际',
+                            type:'funnel',
+                            x: '45%',
+                            width: '45%',
+                            maxSize: '80%',
+                            itemStyle: {
+                                normal: {
+                                    borderColor: '#fff',
+                                    borderWidth: 2,
+                                    label: {
+                                        position: 'inside',
+                                        formatter: '{c}%',
+                                        textStyle: {
+                                            color: '#fff'
                                         }
                                     }
                                 },
-                                data : [
-                                    [{type : 'min'}, {type : 'max'}]
-                                ]
-                            }
-                        },
-                        {
-                            name:'百度',
-                            type:'bar',
-                            barWidth : 5,
-                            stack: '搜索引擎',
-                            data:[620, 732, 701, 734, 1090, 1130, 1120]
-                        },
-                        {
-                            name:'谷歌',
-                            type:'bar',
-                            stack: '搜索引擎',
-                            data:[120, 132, 101, 134, 290, 230, 220]
-                        },
-                        {
-                            name:'必应',
-                            type:'bar',
-                            stack: '搜索引擎',
-                            data:[60, 72, 71, 74, 190, 130, 110]
-                        },
-                        {
-                            name:'其他',
-                            type:'bar',
-                            stack: '搜索引擎',
-                            data:[62, 82, 91, 84, 109, 110, 120]
+                                emphasis: {
+                                    label: {
+                                        position:'inside',
+                                        formatter: '{b}实际 : {c}%'
+                                    }
+                                }
+                            },
+                            data:[
+                                {value:30, name:'访问'},
+                                {value:10, name:'咨询'},
+                                {value:5, name:'订单'},
+                                {value:50, name:'点击'},
+                                {value:80, name:'展现'}
+                            ]
                         }
                     ]
                 };
 
-
                 // 为echarts对象加载数据
-                myChart.setOption(option);
+                myChart3.setOption(option3);
             }
     );
 </script>
