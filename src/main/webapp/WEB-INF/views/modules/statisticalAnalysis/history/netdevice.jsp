@@ -14,7 +14,6 @@
 </head>
 <body>
 <div id="main3" style="height:600px"></div>
-<div id="main4" style="height:600px"></div>
 <script type="text/javascript">
     // 路径配置
     require.config({

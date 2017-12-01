@@ -3,22 +3,6 @@
  */
 package com.thinkgem.jeesite.modules.cms.web;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.common.config.Global;
@@ -31,6 +15,20 @@ import com.thinkgem.jeesite.modules.cms.service.CategoryService;
 import com.thinkgem.jeesite.modules.cms.service.FileTplService;
 import com.thinkgem.jeesite.modules.cms.service.SiteService;
 import com.thinkgem.jeesite.modules.cms.utils.TplUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 栏目Controller
@@ -150,6 +148,9 @@ public class CategoryController extends BaseController {
 				map.put("pId", e.getParent()!=null?e.getParent().getId():0);
 				map.put("name", e.getName());
 				map.put("module", e.getModule());
+				map.put("iconOpen","/jeesite/static/jquery-ztree/3.5.12/css/zTreeStyle/img/diy/1_open.png");
+				map.put("iconClose","/jeesite/static/jquery-ztree/3.5.12/css/zTreeStyle/img/diy/1_close.png");
+				map.put("icon","/jeesite/static/jquery-ztree/3.5.12/css/zTreeStyle/img/diy/6.png");
 				mapList.add(map);
 			}
 		}
