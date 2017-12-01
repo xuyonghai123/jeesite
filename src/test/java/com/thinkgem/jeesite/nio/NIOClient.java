@@ -44,7 +44,7 @@ public class NIOClient {
         String sendText;
         int count;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             //选择一组键，其相应的通道已为 I/O 操作准备就绪。
             //此方法执行处于阻塞模式的选择操作。
             selector.select();

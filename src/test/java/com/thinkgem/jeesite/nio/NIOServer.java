@@ -85,7 +85,14 @@ public class NIOServer {
             //将缓冲区清空以备下次读取
             receiveByteBuffer.clear();
             //读取服务器发送来的数据到缓冲区
+            try{
             count = socketChannel.read(receiveByteBuffer);
+            }catch(IOException e){
+                selectionKey.cancel();
+                socketChannel.socket().close();
+                socketChannel.close();
+                return;
+            }
             if (count>0){
                 receiveText = new String(receiveByteBuffer.array(),0,count);
                 System.out.println("服务器端接收客户端数据==:"+receiveText);
@@ -112,7 +119,6 @@ public class NIOServer {
         int port=8888;
         NIOServer nioServer = new NIOServer(port);
         nioServer.listen();
-
     }
 
 }
