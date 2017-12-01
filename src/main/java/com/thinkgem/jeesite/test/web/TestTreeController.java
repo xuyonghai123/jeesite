@@ -3,12 +3,13 @@
  */
 package com.thinkgem.jeesite.test.web;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thinkgem.jeesite.common.config.Global;
+import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
+import com.thinkgem.jeesite.test.entity.TestTree;
+import com.thinkgem.jeesite.test.service.TestTreeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.thinkgem.jeesite.common.config.Global;
-import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.test.entity.TestTree;
-import com.thinkgem.jeesite.test.service.TestTreeService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 树结构生成Controller
@@ -55,6 +54,18 @@ public class TestTreeController extends BaseController {
 		return orderDishes;
 	}
 
+	@RequestMapping(value = "/test1")
+	@ResponseBody
+	public OrderDishes testData1(HttpServletRequest request, HttpServletResponse response, Model model) {
+		OrderDishes orderDishes = new OrderDishes();
+		orderDishes.setDiscountAmount(BigDecimal.valueOf(100));
+		orderDishes.setMemo("test");
+		orderDishes.setPeopleNum(5);
+		orderDishes.setPostpone(true);
+		orderDishes.setTotalAmount(BigDecimal.valueOf(15));
+		System.out.println("orderDishes:" + orderDishes.toString());
+		return orderDishes;
+	}
 
 	@RequiresPermissions("test:testTree:view")
 	@RequestMapping(value = {"list", ""})
